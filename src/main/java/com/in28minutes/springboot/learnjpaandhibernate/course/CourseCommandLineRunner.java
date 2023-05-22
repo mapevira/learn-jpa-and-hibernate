@@ -1,5 +1,7 @@
 package com.in28minutes.springboot.learnjpaandhibernate.course;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -36,6 +38,7 @@ public class CourseCommandLineRunner implements CommandLineRunner {
         repository.save(new Course(1, "Learn AWS Jpa!", IN28MINUTES));
         repository.save(new Course(2, "Learn Azure Jpa!", IN28MINUTES));
         repository.save(new Course(3, "Learn DevOps Jpa!", IN28MINUTES));
+        repository.save(new Course(4, "Learn Docker Jpa!", "pvraul1"));
 
         repository.deleteById(1L);
 
@@ -43,6 +46,20 @@ public class CourseCommandLineRunner implements CommandLineRunner {
             log.info(repository.findById(2L).toString());
             log.info(repository.findById(3L).toString());
         }
+
+        List<Course> courses = repository.findAll();
+        courses.stream().forEach(o -> {
+            if (log.isInfoEnabled()) {
+                log.info(o.toString());
+            }
+        });
+
+        courses = repository.findByAuthor(IN28MINUTES);
+        courses.stream().forEach(o -> {
+            if (log.isInfoEnabled()) {
+                log.info(o.toString());
+            }
+        });
 
     }
 
