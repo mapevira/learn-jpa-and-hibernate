@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import com.in28minutes.springboot.learnjpaandhibernate.course.Course;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * The Course Jdbc Command Line Runner.
  *
@@ -14,6 +16,7 @@ import com.in28minutes.springboot.learnjpaandhibernate.course.Course;
  * @version 21 May 2023 - 19:17:49
  *
  */
+@Slf4j
 @Component
 public class CourseJdbcCommandLineRunner implements CommandLineRunner {
 
@@ -29,6 +32,11 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
         repository.insert(new Course(3, "Learn DevOps Now!", IN28MINUTES));
 
         repository.deleteById(1);
+        if (log.isInfoEnabled()) {
+            log.info(repository.findById(2).toString());
+            log.info(repository.findById(3).toString());
+        }
+        
     }
 
 }
