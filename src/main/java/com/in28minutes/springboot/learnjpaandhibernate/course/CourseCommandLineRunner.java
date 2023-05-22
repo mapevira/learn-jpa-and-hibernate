@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.in28minutes.springboot.learnjpaandhibernate.course.jdbc.CourseJdbcRepository;
-import com.in28minutes.springboot.learnjpaandhibernate.course.jpa.CourseJpaRepository;
+import com.in28minutes.springboot.learnjpaandhibernate.course.srpingdatajpa.CourseSpringDataJpaRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,22 +24,26 @@ public class CourseCommandLineRunner implements CommandLineRunner {
 
     // @Autowired
     // private CourseJdbcRepository repository;
-    
+
+    //@Autowired
+    //private CourseJpaRepository repository;
+
     @Autowired
-    private CourseJpaRepository repository;
+    private CourseSpringDataJpaRepository repository;
 
     @Override
     public void run(String... args) throws Exception {
-        repository.insert(new Course(1, "Learn AWS Jpa!", IN28MINUTES));
-        repository.insert(new Course(2, "Learn Azure Jpa!", IN28MINUTES));
-        repository.insert(new Course(3, "Learn DevOps Jpa!", IN28MINUTES));
+        repository.save(new Course(1, "Learn AWS Jpa!", IN28MINUTES));
+        repository.save(new Course(2, "Learn Azure Jpa!", IN28MINUTES));
+        repository.save(new Course(3, "Learn DevOps Jpa!", IN28MINUTES));
 
-        repository.deleteById(1);
+        repository.deleteById(1L);
+
         if (log.isInfoEnabled()) {
-            log.info(repository.findById(2).toString());
-            log.info(repository.findById(3).toString());
+            log.info(repository.findById(2L).toString());
+            log.info(repository.findById(3L).toString());
         }
-        
+
     }
 
 }
