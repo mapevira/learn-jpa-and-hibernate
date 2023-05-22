@@ -1,10 +1,11 @@
-package com.in28minutes.springboot.learnjpaandhibernate.course.jdbc;
+package com.in28minutes.springboot.learnjpaandhibernate.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.in28minutes.springboot.learnjpaandhibernate.course.Course;
+import com.in28minutes.springboot.learnjpaandhibernate.course.jdbc.CourseJdbcRepository;
+import com.in28minutes.springboot.learnjpaandhibernate.course.jpa.CourseJpaRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,18 +19,21 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+public class CourseCommandLineRunner implements CommandLineRunner {
 
     private static final String IN28MINUTES = "in28minutes";
 
+    // @Autowired
+    // private CourseJdbcRepository repository;
+    
     @Autowired
-    private CourseJdbcRepository repository;
+    private CourseJpaRepository repository;
 
     @Override
     public void run(String... args) throws Exception {
-        repository.insert(new Course(1, "Learn AWS Now!", IN28MINUTES));
-        repository.insert(new Course(2, "Learn Azure Now!", IN28MINUTES));
-        repository.insert(new Course(3, "Learn DevOps Now!", IN28MINUTES));
+        repository.insert(new Course(1, "Learn AWS Jpa!", IN28MINUTES));
+        repository.insert(new Course(2, "Learn Azure Jpa!", IN28MINUTES));
+        repository.insert(new Course(3, "Learn DevOps Jpa!", IN28MINUTES));
 
         repository.deleteById(1);
         if (log.isInfoEnabled()) {
